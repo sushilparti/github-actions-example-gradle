@@ -52,16 +52,16 @@ jobs:
       - name: Set Environment Variables
         id: branch_check
         run: |
-          echo "Running on branch ${{ github.ref#/*/* }}"
-          if [[ ${GITHUB_REF#/*/*} == develop ]]; then
+          echo "Running on branch ${{ github.ref }}"
+          if [[ ${GITHUB_REF#*/*/} == develop ]]; then
             echo "::set-output name=env_name::Sandbox"
             echo "::set-output name=kubeconfig::/opt/kubecfg/dev-cfg"
             echo "::set-output name=release_env::sandbox"
-          elif [[ ${GITHUB_REF#/*/*} == staging ]]; then
+          elif [[ ${GITHUB_REF#*/*} == staging ]]; then
              echo "::set-output name=env_name::Staging"
              echo "::set-output name=kubeconfig::/opt/kubecfg/test-cfg"
              echo "::set-output name=release_env::Staging"
-          elif [[ ${GITHUB_REF#/*/*} == master ]]; then
+          elif [[ ${GITHUB_REF#*/*} == master ]]; then
              echo "::set-output name=env_name::Production"
              echo "::set-output name=kubeconfig::/opt/kubecfg/prod-cfg"
              echo "::set-output name=release_env::Production"
