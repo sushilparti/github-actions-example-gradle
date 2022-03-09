@@ -52,7 +52,7 @@ jobs:
       - name: Set Environment Variables
         id: branch_check
         run: |
-          echo "Running on branch ${{ github.ref }}"
+          echo "Running on branch ${{ GITHUB_REF#/*/* }}"
           if [[ ${GITHUB_REF#/*/*} == develop ]]; then
             echo "::set-output name=env_name::Sandbox"
             echo "::set-output name=kubeconfig::/opt/kubecfg/dev-cfg"
